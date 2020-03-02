@@ -1,86 +1,86 @@
 # 前端操作小技巧
-JS部分
-1.快速字符串，数字互转：
-const number = '10';
-number = +number;
-console.log(number); // 10
+## JS部分
+### 1.快速字符串，数字互转：
+#### const number = '10';
+#### number = +number;
+#### console.log(number); // 10
 
-const number2 = 10;
-number2 = number2+'' ;
-console.log(number2 ); // '10'
+#### const number2 = 10;
+#### number2 = number2+'' ;
+#### console.log(number2 ); // '10'
 
-2.快速浮点数转整数：
-console.log(10.9 | 0);  // 10
-console.log(-10.9 | 0); //- 10
+### 2.快速浮点数转整数：
+#### console.log(10.9 | 0);  // 10
+#### console.log(-10.9 | 0); //- 10
 
-3.数组去重方式
-Array.prototype.unique = function() {
-    return [...new Set(this)];
-}
-var array = [1, 2, 3, 43, 45, 1, 2, 2, 4, 5];
-array.unique();
-备注：
-Set和Map类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在Set中，没有重复的key。
-要创建一个Set，需要提供一个Array作为输入，或者直接创建一个空Set：
-var s1 = new Set(); // 空Setvar s2 = new Set([1, 2, 3]); // 含1, 2, 3
-重复元素在Set中自动被过滤：
+### 3.数组去重方式
+#### Array.prototype.unique = function() {
+####     return [...new Set(this)];
+#### }
+#### var array = [1, 2, 3, 43, 45, 1, 2, 2, 4, 5];
+#### array.unique();
+#### 备注：
+#### Set和Map类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在Set中，没有重复的key。
+#### 要创建一个Set，需要提供一个Array作为输入，或者直接创建一个空Set：
+#### var s1 = new Set(); // 空Setvar s2 = new Set([1, 2, 3]); // 含1, 2, 3
+#### 重复元素在Set中自动被过滤：
 var s = new Set([1, 2, 3, 3, '3']);
 s; // Set {1, 2, 3, "3"}
 
-4.数组映射
-const cities = [
-    { name: 'Paris', visited: 'no' },
-    { name: 'Lyon', visited: 'no' },
-    { name: 'Marseille', visited: 'yes' },
-    { name: 'Rome', visited: 'yes' },
-    { name: 'Milan', visited: 'no' },
-    { name: 'Palermo', visited: 'yes' },
-    { name: 'Genoa', visited: 'yes' },
-    { name: 'Berlin', visited: 'no' },
-    { name: 'Hamburg', visited: 'yes' },
-    { name: 'New York', visited: 'yes' }
-];
+### 4.数组映射
+#### const cities = [
+####     { name: 'Paris', visited: 'no' },
+####     { name: 'Lyon', visited: 'no' },
+####     { name: 'Marseille', visited: 'yes' },
+####     { name: 'Rome', visited: 'yes' },
+####     { name: 'Milan', visited: 'no' },
+####     { name: 'Palermo', visited: 'yes' },
+####     { name: 'Genoa', visited: 'yes' },
+####     { name: 'Berlin', visited: 'no' },
+####     { name: 'Hamburg', visited: 'yes' },
+####     { name: 'New York', visited: 'yes' }
+#### ];
 
-const cityNames = Array.from(cities, ({ name}) => name);
-console.log(cityNames);
-// 输出 ["Paris", "Lyon", "Marseille", "Rome", "Milan", "Palermo", "Genoa", "Berlin", "Hamburg", "New York"]
+#### const cityNames = Array.from(cities, ({ name}) => name);
+#### console.log(cityNames);
+#### // 输出 ["Paris", "Lyon", "Marseille", "Rome", "Milan", "Palermo", "Genoa", "Berlin", "Hamburg", "New York"]
 
-5.快速删除数组元素
-arr.splice(arr.findIndex(item => item.id === 8), 1)
+### 5.快速删除数组元素
+#### arr.splice(arr.findIndex(item => item.id === 8), 1)
 
-6.随机生成字母和数组的组合
-Math.random().toString(36).substr(2);
+### 6.随机生成字母和数组的组合
+#### Math.random().toString(36).substr(2);
 
-7.接收函数返回的多个结果
-在下面的代码中，我们从/post中获取一个帖子，然后在/comments中获取相关评论。由于我们使用的是async/await，函数把返回值放在一个数组中。而我们使用数组解构后就可以把返回值直接赋给相应的变量。
+### 7.接收函数返回的多个结果
+#### 在下面的代码中，我们从/post中获取一个帖子，然后在/comments中获取相关评论。由于我们使用的是async/await，函数把返回值放在一个数组中。而我们使#### 用数组解构后就可以把返回值直接赋给相应的变量。
 
-async function getFullPost() { 
-    return await Promise.all([
-        fetch('/post'), 
-        fetch('/comments')
-    ]); 
-} const [post, comments] = getFullPost();
+#### async function getFullPost() { 
+####     return await Promise.all([
+####         fetch('/post'), 
+####         fetch('/comments')
+####     ]); 
+#### } const [post, comments] = getFullPost();
 
-8.数值交换
+### 8.数值交换
 
-let param1 = 1;
-let param2 = 2;
-[param1, param2] = [param2, param1];
-console.log(param1) // 2
-console.log(param2) // 1
+#### let param1 = 1;
+#### let param2 = 2;
+#### [param1, param2] = [param2, param1];
+#### console.log(param1) // 2
+#### console.log(param2) // 1
 
-9.合并对象
-ES6带来了扩展运算符（...）。它一般被用来解构数组，但你也可以用它处理对象。
-接下来，我们使用扩展运算符来展开一个新的对象，第二个对象中的属性值会改写第一个对象的属性值。比如object2的b和c就会改写object1的同名属性。
+#### 9.合并对象
+#### ES6带来了扩展运算符（...）。它一般被用来解构数组，但你也可以用它处理对象。
+#### 接下来，我们使用扩展运算符来展开一个新的对象，第二个对象中的属性值会改写第一个对象的属性值。比如object2的b和c就会改写object1的同名属性。
 
-let object1 = {a:1,b:2,c:3}
-let object2 = {b:30,c:40,d:50}
-let merged = {...object1,...object2}
-console.log(merged)//{a: 1, b: 30, c: 40, d: 50}
-let arr1 = [1,2,3]
-let arr2 = [4,5,6]
-let mergedArr = [...arr1,...arr2]
-console.log(mergedArr)//1,2,3,4,5,6
+#### let object1 = {a:1,b:2,c:3}
+#### let object2 = {b:30,c:40,d:50}
+#### let merged = {...object1,...object2}
+#### console.log(merged)//{a: 1, b: 30, c: 40, d: 50}
+#### let arr1 = [1,2,3]
+#### let arr2 = [4,5,6]
+#### let mergedArr = [...arr1,...arr2]
+#### console.log(mergedArr)//1,2,3,4,5,6
 
 10.js-按照某个属性排序数组里的元素(sort排序法)
 let a = [{name:'Konges',age:20},{name:'pander',age:21},{name:'jiang',age:22}]
